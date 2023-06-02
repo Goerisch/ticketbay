@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest --watchAll --no-cache",
     "start": "ts-node-dev  --respawn --transpile-only --exit-child --watch src src/index.ts"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnviroment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
   },
   "keywords": [],
   "author": "",
