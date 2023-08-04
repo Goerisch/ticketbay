@@ -2,6 +2,7 @@ import request from 'supertest';
 import {app} from '../../app';
 import {Ticket} from '../../models/ticket';
 import {Order, OrderStatus} from '../../models/orders';
+import {natsWrapper} from '../../nats-wrapper';
 
 it('marks order as cancelled', async () => {
     //create a ticket
@@ -68,4 +69,27 @@ it('error when trying to cancel order from other user', async () => {
         .expect(401);
 });
 
-it.todo('emits event when order gets cancelled');
+it('emits event when order gets cancelled', async () => {
+    //create a ticket
+    const ticket = Ticket.build({
+        title: 'Hans Zimmer',
+        price: 44,
+    });
+    await ticket.save();
+
+    const user = global.signin();
+    //request to build order with the ticket
+    const {body: order} = await request(app)
+        .post('/api/orders')
+        .set('Cookie', user)
+        .send({ticketId: ticket.id})
+        .expect(201);
+    //cancel order
+    await request(app)
+        .delete(`/api/orders/${order.id}`)
+        .set('Cookie', user)
+        .send()
+        .expect(204);
+
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
