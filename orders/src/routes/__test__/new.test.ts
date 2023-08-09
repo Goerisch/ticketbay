@@ -17,7 +17,11 @@ it('returns error if ticket does not exit', async () => {
 
 it('returns error if ticket is already reserved', async () => {
     //save ticket to db
-    const ticket = Ticket.build({title: 'faun', price: 20});
+    const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
+        title: 'faun',
+        price: 20,
+    });
     await ticket.save();
     const ticketId = ticket.id;
     //reserve that ticket
@@ -40,7 +44,11 @@ it('returns error if ticket is already reserved', async () => {
 
 it('successfully reserves a ticket', async () => {
     //save ticket to db
-    const ticket = Ticket.build({title: 'faun', price: 20});
+    const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
+        title: 'faun',
+        price: 20,
+    });
     await ticket.save();
     const ticketId = ticket.id;
     //reserve the ticket
@@ -53,7 +61,11 @@ it('successfully reserves a ticket', async () => {
 
 it('emits an order created event', async () => {
     //save ticket to db
-    const ticket = Ticket.build({title: 'faun', price: 20});
+    const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
+        title: 'faun',
+        price: 20,
+    });
     await ticket.save();
     const ticketId = ticket.id;
     //reserve the ticket

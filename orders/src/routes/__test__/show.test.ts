@@ -1,10 +1,12 @@
 import request from 'supertest';
 import {app} from '../../app';
 import {Ticket} from '../../models/ticket';
+import mongoose from 'mongoose';
 
 it('fetches the order', async () => {
     //create a ticket
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: 'Hans Zimmer',
         price: 44,
     });
@@ -46,6 +48,7 @@ it('error when trying to find non existing order', async () => {
 it('error when trying to access order from other user', async () => {
     //create a ticket
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: 'Hans Zimmer',
         price: 44,
     });

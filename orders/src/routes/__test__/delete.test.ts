@@ -3,10 +3,12 @@ import {app} from '../../app';
 import {Ticket} from '../../models/ticket';
 import {Order, OrderStatus} from '../../models/orders';
 import {natsWrapper} from '../../nats-wrapper';
+import mongoose from 'mongoose';
 
 it('marks order as cancelled', async () => {
     //create a ticket
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: 'Hans Zimmer',
         price: 44,
     });
@@ -48,6 +50,7 @@ it('error when trying to cancel non existing order', async () => {
 it('error when trying to cancel order from other user', async () => {
     //create a ticket
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: 'Hans Zimmer',
         price: 44,
     });
@@ -72,6 +75,7 @@ it('error when trying to cancel order from other user', async () => {
 it('emits event when order gets cancelled', async () => {
     //create a ticket
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: 'Hans Zimmer',
         price: 44,
     });
