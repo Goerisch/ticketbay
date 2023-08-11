@@ -15,7 +15,7 @@ import {natsWrapper} from '../nats-wrapper';
 
 const router = express.Router();
 
-const RESERVATION_WINDOW_SECONDS = 15 * 60;
+const RESERVATION_WINDOW_SECONDS = 1 * 60;
 
 router.post(
     '/api/orders',

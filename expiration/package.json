@@ -18,15 +18,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dgticketbay/common": "^1.0.8",
+    "@dgticketbay/common": "^1.0.9",
     "bull": "^4.11.2",
     "node-nats-streaming": "^0.3.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.1",
     "@types/bull": "^4.10.0",
+    "@types/jest": "^29.5.1",
     "jest": "^29.5.0",
     "ts-jest": "^29.1.0"
   }
