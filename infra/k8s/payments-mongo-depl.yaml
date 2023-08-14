@@ -1,34 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: expiration-redis-depl
+  name: payments-mongo-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: expiration-redis
+      app: payments-mongo
   template:
     metadata:
       labels:
-        app: expiration-redis
+        app: payments-mongo
     spec:
       containers:
-      - name: expiration-redis
-        image: redis
+      - name: payments-mongo
+        image: mongo
         resources:
           limits:
             memory: "128Mi"
-            cpu: "50m"
+            cpu: "100m"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: expiration-redis-srv
+  name: payments-mongo-srv
 spec:
   selector:
-    app: expiration-redis
+    app: payments-mongo
   ports:
   - name: db
     protocol: TCP
-    port: 6379
-    targetPort: 6379
+    port: 27017
+    targetPort: 27017
