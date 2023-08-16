@@ -36,10 +36,6 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.name
-        resources:
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
         ports:
         - containerPort: 3000
 ---

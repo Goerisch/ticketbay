@@ -26,10 +26,6 @@ spec:
               secretKeyRef:
                 name: public-stripe-key
                 key: NEXT_PUBLIC_STRIPE_KEY
-        resources:
-          limits:
-            memory: "2Gi"
-            cpu: "500m"
         ports:
         - containerPort: 3000
 ---
