@@ -40,7 +40,7 @@ const OrderDetails = ({order, currentUser}) => {
             <h4>{order.ticket.price}€</h4>
             <StripeCheckout
                 token={({id}) => doRequest({token: id})}
-                stripeKey={process.env.NEXT_PUBLIC_STRIPE_KEY}
+                stripeKey='pk_test_51NetmXGU4lT1uifgUuAe548Dh5Tt7T5PKaX16ycgCci6tdvlMaxP33AtRMnkzQZhyonwIZSZLk9a0P9UyTsxOdGY004trWXMEN'
                 amount={order.ticket.price * 100}
                 currency='eur'
                 email={currentUser.email}
