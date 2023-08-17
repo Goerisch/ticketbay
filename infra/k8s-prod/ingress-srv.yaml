@@ -7,7 +7,8 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - http:
+    - host: www.ticketbucht.de
+      http:
         paths:
           - path: /api/payments/?(.*)
             pathType: Prefix
@@ -50,7 +51,7 @@ kind: Service
 metadata:
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
-    service.beta.kubernetes.io/do-loadbalancer-hostname: '174.138.103.12'
+    service.beta.kubernetes.io/do-loadbalancer-hostname: 'www.ticketbucht.de'
   labels:
     helm.sh/chart: ingress-nginx-2.0.3
     app.kubernetes.io/name: ingress-nginx
