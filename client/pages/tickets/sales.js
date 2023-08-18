@@ -1,19 +1,26 @@
 import Link from 'next/link';
 
-const LandingPage = ({currentUser, tickets}) => {
-    const ticketList = tickets.map((ticket) => {
+const MyTicketsPage = ({currentUser, tickets}) => {
+    function isMyTicket(element, index, array) {
+        return element.userId === currentUser.id;
+    }
+    const myTickets = tickets.filter(isMyTicket);
+    const ticketList = myTickets.map((ticket) => {
         return (
             <tr key={ticket.id}>
                 <td>{ticket.title}</td>
                 <td>{ticket.price}€</td>
                 <td>
-                    <button className='btn btn-secondary'>
+                    <button
+                        className='btn btn-secondary'
+                        disabled={ticket.orderId}
+                    >
                         <Link
                             className='nav-link'
-                            href='/tickets/[ticketId]'
-                            as={`/tickets/${ticket.id}`}
+                            href='/tickets/edit/[ticketId]'
+                            as={`/tickets/edit/${ticket.id}`}
                         >
-                            View
+                            Edit
                         </Link>
                     </button>
                 </td>
@@ -22,13 +29,13 @@ const LandingPage = ({currentUser, tickets}) => {
     });
     return (
         <div>
-            <h1>Tickets</h1>
+            <h1>My Tickets</h1>
             <table className='table'>
                 <thead>
                     <tr>
                         <th>Title</th>
                         <th>Price</th>
-                        <th>Details</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>{ticketList}</tbody>
@@ -37,9 +44,9 @@ const LandingPage = ({currentUser, tickets}) => {
     );
 };
 
-LandingPage.getInitialProps = async (context, client, currentUser) => {
+MyTicketsPage.getInitialProps = async (context, client, currentUser) => {
     const {data} = await client.get('/api/tickets');
     return {tickets: data};
 };
 
-export default LandingPage;
+export default MyTicketsPage;
