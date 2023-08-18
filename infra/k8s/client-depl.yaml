@@ -26,6 +26,11 @@ spec:
               secretKeyRef:
                 name: public-stripe-key
                 key: NEXT_PUBLIC_STRIPE_KEY
+          - name: NEXT_PUBLIC_BASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: public-base-url
+                key: NEXT_PUBLIC_BASE_URL
         ports:
         - containerPort: 3000
 ---
