@@ -128,3 +128,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+infra/k8s-dev/dev-issuer.yaml
+infra/k8s-prod/prod-issuer.yaml
