@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: orders-mongo-depl
 spec:
   replicas: 1
+  serviceName: orders-mongo
   selector:
     matchLabels:
       app: orders-mongo
@@ -15,6 +16,21 @@ spec:
       containers:
       - name: orders-mongo
         image: mongo
+        ports:
+          - containerPort: 27017
+        volumeMounts:
+          - name: orders-mongo-pvc
+            mountPath: "/data"
+  volumeClaimTemplates:
+    - metadata:
+        name: orders-mongo-pvc
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
+        storageClassName: do-block-storage
 ---
 apiVersion: v1
 kind: Service
