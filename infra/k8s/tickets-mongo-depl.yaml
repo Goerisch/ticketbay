@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: tickets-mongo-depl
 spec:
   replicas: 1
+  serviceName: tickets-mongo
   selector:
     matchLabels:
       app: tickets-mongo
@@ -15,7 +16,21 @@ spec:
       containers:
       - name: tickets-mongo
         image: mongo
-
+        ports:
+          - containerPort: 27017
+        volumeMounts:
+          - name: tickets-mongo-pvc
+            mountPath: "/data"
+  volumeClaimTemplates:
+    - metadata:
+        name: tickets-mongo-pvc
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
+        storageClassName: do-block-storage
 ---
 apiVersion: v1
 kind: Service
