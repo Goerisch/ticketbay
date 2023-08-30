@@ -2,8 +2,6 @@
 
 Anwendung zum Kaufen und Verkaufen von Tickets (Ebay für Tickets)
 
-Lokal kann die Anwendung über den folgenden Link aufgerufen werden.
-[Ticketbay.dev](https://ticketbay.dev)
 Temporär ist die Anwendung unter folgendem Link im Internet erreichbar, aufgrund der laufenden Kosten eines gehosteten Kubernetes-Clusters, wird dieser in absehbarer Zeit abgekündigt werden:
 [Ticketbucht.de](https://ticketbucht.de)
 
@@ -65,3 +63,8 @@ Das Modul ist als npm-package deployed und somit kein eigener Service.
 Der Cluster kann lokal mit skaffold gestartet werden, um Änderungen der Services automatisiert zu updaten. Dafür muss der Befehl "skaffold dev" ausgeführt werden.
 Voraussetzung: Docker Desktop muss lokal gestartet sein und Kubernetes muss in Docker Desktop aktiviert sein.
 Zudem muss ein nginx-ingress-controller lokal deployed sein.
+
+Damit die Anwendung lokal unter folgendem Link aufgerufen werden kann, muss die Hosts-datei unter etc/hosts um den Eintrag "127.0.0.1 ticketbay.dev" ergänzt werden.
+[Ticketbay.dev](https://ticketbay.dev)
+Anschließend sind alle API-Endpunkte, sowie die Clientanwendung im Browser über die Domain erreichbar.
+Aufgrund des lokal nicht vorhandenen SSL-Zertifikats kann es eine Warnung im Browser geben. Damit die Seite dennoch angezeigt wird, muss im Browser einfach "thisisunsafe" eingegeben werden.
