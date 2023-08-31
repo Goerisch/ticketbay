@@ -3,11 +3,17 @@ import {useState} from 'react';
 
 export default ({url, method, body, onSuccess}) => {
     const [errors, setErrors] = useState(null);
-
+    //accepts self-signed certificates,
+    //TODO: must be set true for production!
+    const httpsAgent = new https.Agent({rejectUnauthorized: false});
     const doRequest = async (props = {}) => {
         try {
             setErrors(null);
-            const response = await axios[method](url, {...body, ...props});
+            const response = await axios[method](
+                url,
+                {...body, ...props},
+                httpsAgent,
+            );
 
             if (onSuccess) {
                 onSuccess(response.data);
