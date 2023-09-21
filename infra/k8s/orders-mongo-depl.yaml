@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: orders-mongo-depl
-spec:
+  name: orders-mongo-sfs
   replicas: 1
   serviceName: orders-mongo
   selector:
@@ -20,7 +19,7 @@ spec:
           - containerPort: 27017
         volumeMounts:
           - name: orders-mongo-pvc
-            mountPath: "/data"
+            mountPath: "/data/orders"
   volumeClaimTemplates:
     - metadata:
         name: orders-mongo-pvc
@@ -29,7 +28,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 100Mi
+            storage: 1Gi
         storageClassName: do-block-storage
 ---
 apiVersion: v1

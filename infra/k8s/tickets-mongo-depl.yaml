@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: tickets-mongo-depl
+  name: tickets-mongo-sfs
 spec:
   replicas: 1
   serviceName: tickets-mongo
@@ -20,7 +20,7 @@ spec:
           - containerPort: 27017
         volumeMounts:
           - name: tickets-mongo-pvc
-            mountPath: "/data"
+            mountPath: "/data/tickets"
   volumeClaimTemplates:
     - metadata:
         name: tickets-mongo-pvc
@@ -29,7 +29,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 100Mi
+            storage: 1Gi
         storageClassName: do-block-storage
 ---
 apiVersion: v1

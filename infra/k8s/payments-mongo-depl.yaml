@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: payments-mongo-depl
+  name: payments-mongo-sfs
 spec:
   replicas: 1
   serviceName: payments-mongo
@@ -20,7 +20,7 @@ spec:
           - containerPort: 27017
         volumeMounts:
           - name: payments-mongo-pvc
-            mountPath: "/data"
+            mountPath: "/data/payments"
   volumeClaimTemplates:
     - metadata:
         name: payments-mongo-pvc
@@ -29,7 +29,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 100Mi
+            storage: 1Gi
         storageClassName: do-block-storage
 ---
 apiVersion: v1

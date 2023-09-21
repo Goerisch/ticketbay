@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: auth-mongo-depl
+  name: auth-mongo-sfs
 spec:
   replicas: 1
   serviceName: auth-mongo
@@ -20,7 +20,7 @@ spec:
           - containerPort: 27017
         volumeMounts:
           - name: auth-mongo-pvc
-            mountPath: "/data"
+            mountPath: "/data/auth"
   volumeClaimTemplates:
     - metadata:
         name: auth-mongo-pvc
@@ -29,7 +29,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 100Mi
+            storage: 1Gi
         storageClassName: do-block-storage
 ---
 #ClusterIp Service
